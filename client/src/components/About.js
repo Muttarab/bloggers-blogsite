@@ -1,5 +1,5 @@
 import { Box, makeStyles, Typography } from '@material-ui/core';
-
+//about
 const useStyles = makeStyles({
     banner: {
         backgroundImage: `url(${'https://www.wallpapertip.com/wmimgs/23-236943_us-wallpaper-for-website.jpg'})`,
