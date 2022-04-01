@@ -7,7 +7,6 @@ let refreshtokens = [];
 exports.register = async function (req, res) {
     try {
         const { name, email, password} = req.body
-        const { roleId } = req.params
         const alreadyExistsUser = await User.findOne({ where: { email } }).catch(
             (err) => {
                 console.log("Error: ", err);
@@ -17,8 +16,7 @@ exports.register = async function (req, res) {
             .create({
                 name,
                 email,
-                password,
-                roleId
+                password
             })
             .then(userData => res.status(201).send({
                 success: true,

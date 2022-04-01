@@ -41,14 +41,6 @@ const User = db.define(
         },
       },
     },
-    roleId: {
-			type: DataTypes.INTEGER,
-			references: {
-			  model: 'Role',
-			  key: 'id',
-			  as: 'roleId',
-			}
-		}
   },
   {
     tableName: "Users",

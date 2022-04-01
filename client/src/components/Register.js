@@ -33,7 +33,7 @@ const Register = () => {
         e.preventDefault();
         setError(false);
         try {
-            const result = await axios.post("/user/1/register", {
+            const result = await axios.post("/user/register", {
                 name,
                 email,
                 password,
