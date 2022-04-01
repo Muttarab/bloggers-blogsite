@@ -122,7 +122,7 @@ const PostDetail = ({ match }) => {
           {new Date(postdata.createdAt).toDateString()}
         </Typography>
       </Box>
-      <Typography><PushPinIcon color="primary" className={classes.editIcon} />{parse(postdata.description)}</Typography>
+      <Typography><PushPinIcon color="primary" className={classes.editIcon}/>{postdata.description}</Typography>
       <Comments postdata={postdata} />
     </Box>
   );
