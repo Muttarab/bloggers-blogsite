@@ -7,14 +7,11 @@ import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
-    paperStyle: { marginTop: 115, padding: 20, height: '55vh', width: 350, margin: "20px auto" },
+    paperStyle: { marginTop: 115, padding: 20, height: '70vh', width: 280, margin: "20px auto" },
     headerStyle: { margin: 0 },
     avatarStyle: { backgroundColor: '#1bbd7e', marginBottom: "21px" },
-    btnstyle: { margin: '8px 0', marginTop: 20 },
-    spanstyle: { color: "red", marginTop: "10px" },
-    registerField: {
-        marginTop: 20
-    }
+    btnstyle: { margin: '8px 0' },
+    spanstyle: { color: "red", marginTop: "10px" }
 }));
 const Register = () => {
     const user = useSelector((state) => state.user.currentUser);
@@ -57,9 +54,9 @@ const Register = () => {
                     <Typography variant='caption' gutterBottom>Please fill this form to create an account!</Typography>
                 </Grid>
                 <form onSubmit={handleSubmit}>
-                    <TextField className={classes.registerField} variant='filled' label='Name' placeholder="Enter your name" onChange={(e) => setName(e.target.value)} fullWidth />
-                    <TextField className={classes.registerField} variant='filled' label='Email' placeholder="Enter your email" type='email' onChange={(e) => setEmail(e.target.value)} fullWidth required />
-                    <TextField className={classes.registerField} variant='filled' label='Password' placeholder="Enter your password" type='password' onChange={(e) => setPassword(e.target.value)} fullWidth required />
+                    <TextField label='Name' placeholder="Enter your name" onChange={(e) => setName(e.target.value)} fullWidth />
+                    <TextField label='Email' placeholder="Enter your email" type='email' onChange={(e) => setEmail(e.target.value)} fullWidth required />
+                    <TextField label='Password' placeholder="Enter your password" type='password' onChange={(e) => setPassword(e.target.value)} fullWidth required />
                     <Button type='submit' color='primary' variant="contained" className={classes.btnstyle} fullWidth>Sign up</Button>
                 </form>
                 {error && <Box component="span" className={classes.spanstyle}>Something went wrong! Make sure Password should be atleast 8 characters long.</Box>}

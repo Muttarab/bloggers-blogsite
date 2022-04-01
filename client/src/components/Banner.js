@@ -1,5 +1,4 @@
 import { makeStyles, Box } from '@material-ui/core';
-//banner
 const useStyle = makeStyles({
     image: {
         width: '100%',
