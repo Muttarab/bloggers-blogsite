@@ -2,13 +2,9 @@
   "name": "blog-app",
   "version": "1.0.0",
   "main": "app.js",
-  "engines": {
-    "node": "16.13.1",
-    "npm": "8.1.2"
-  },
   "scripts": {
-    "postinstall": "npm run build",
-    "start": "node app.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:ui": "rm -rf build && cd ./client && npm run build --prod && cp -r build ../"
   },
   "keywords": [],
   "author": "",
