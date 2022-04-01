@@ -1,14 +1,14 @@
 {
   "name": "blog-app",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "engines": {
-    "node": "16.13.1",
-    "npm": "8.1.2"
+    "node": ">=16.13.1",
+    "npm": ">=8.1.2"
   },
   "scripts": {
-    "start": "node app.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "postinstall": "npm run build",
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
