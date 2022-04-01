@@ -46,10 +46,10 @@ const Navbar = () => {
   // this state make for change avatar without refreshing page
   const userprofile = useSelector((state) => state.userprofile.currentUserprofile);
   const [userprofiledata, setUserprofiledata] = useState('');
-  const imgbefore = `http://localhost:${process.env.PORT}/${userprofiledata.slice(7,)}`;
+  const imgbefore = `/${userprofiledata.slice(7,)}`;
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`http://localhost:${process.env.PORT}/userprofile/${user.id}`);
+      const response = await axios.get(`/userprofile/${user.id}`);
       // console.log(response.data.userprofile.picture)
       setUserprofiledata(response.data.userprofile.picture);
       // console.log(userprofiledata.slice(7,))

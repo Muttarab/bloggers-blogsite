@@ -64,7 +64,7 @@ const PostDetail = ({ match }) => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        `http://localhost:${process.env.PORT}/post/${match.params.id}`
+        `/post/${match.params.id}`
       );
       setPostdata(response.data);
       setUsername(response.data.User.name);
@@ -75,12 +75,12 @@ const PostDetail = ({ match }) => {
       setFlag(true);
     }
   }, []);
-  const url = `http://localhost:${process.env.PORT}/${imageurl.slice(7)}`;
+  const url = `/${imageurl.slice(7)}`;
   const deleteBlog = async (e) => {
     e.preventDefault();
     try {
       await axios.delete(
-        `http://localhost:${process.env.PORT}/post/${match.params.id}/delete`,
+        `/post/${match.params.id}/delete`,
         {
           headers: {
             Authorization:

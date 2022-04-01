@@ -42,7 +42,7 @@ const Comment = ({ comment, setToggle }) => {
     const user = useSelector((state) => state.user.currentUser);
     useEffect(() => {
         const getData = async () => {
-            const response = await axios.get(`http://localhost:${process.env.PORT}/user/${comment.userId}`)
+            const response = await axios.get(`/user/${comment.userId}`)
             setUsername(response.data.name);
         }
         getData();
@@ -52,7 +52,7 @@ const Comment = ({ comment, setToggle }) => {
     }, [])
     const removeComment = async () => {
         try {
-            await axios.delete(`http://localhost:${process.env.PORT}/comment/${commentid}/delete`, {
+            await axios.delete(`/comment/${commentid}/delete`, {
                 headers: {
                     Authorization: "Bearer " + JSON.parse(localStorage.getItem('currentUser')).accesstoken
                 }

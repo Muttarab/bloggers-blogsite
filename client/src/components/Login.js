@@ -35,7 +35,7 @@ const Login = () => {
     const login = async (dispatch, user) => {
         dispatch(loginStart());
         try {
-            const result = await axios.post(`http://localhost:${process.env.PORT}/user/login`, {
+            const result = await axios.post(`/user/login`, {
                 email,
                 password,
             });

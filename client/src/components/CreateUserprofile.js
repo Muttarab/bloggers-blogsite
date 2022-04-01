@@ -53,7 +53,7 @@ const CreateUserprofile = () => {
     const [userprofiledata, setUserprofiledata] = useState(initialUserprofile);
     const [imageurl, setImageurl] = useState('');
     const { isFetching, error } = useSelector((state) => state.userprofile);
-    const imgbefore = `http://localhost:${process.env.PORT}/${userprofiledata.picture.slice(7,)}`
+    const imgbefore = `/${userprofiledata.picture.slice(7,)}`
     const userid = user.id;
     const name = user.name;
     const email = user.email;
@@ -71,7 +71,7 @@ const CreateUserprofile = () => {
     }, [userprofiledata.picture])
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get(`http://localhost:${process.env.PORT}/userprofile/${userid}`)
+            const response = await axios.get(`/userprofile/${userid}`)
             setUserprofiledata({ gender: response.data.userprofile.gender, phonenumber: response.data.userprofile.phonenumber, bio: response.data.userprofile.bio, picture: response.data.userprofile.picture })
         }
         fetchData()
@@ -90,7 +90,7 @@ const CreateUserprofile = () => {
             data.append("gender", userprofiledata.gender);
             data.append("phonenumber", userprofiledata.phonenumber);
             data.append("bio", userprofiledata.bio);
-            const result = await axios.post(`http://localhost:${process.env.PORT}/userprofile/${userid}`,
+            const result = await axios.post(`/userprofile/${userid}`,
                 data, {
                 headers: {
                     Authorization: "Bearer " + JSON.parse(localStorage.getItem('currentUser')).accesstoken

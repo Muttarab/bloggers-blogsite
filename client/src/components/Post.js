@@ -56,12 +56,12 @@ const useStyle = makeStyles({
 
 const Post = ({ post }) => {
   const classes = useStyle();
-  const url = `http://localhost:${process.env.PORT}/${post.picture.slice(7)}`;
+  const url = `/${post.picture.slice(7)}`;
   const [username, setUsername] = useState("");
   useEffect(() => {
     const getData = async () => {
       const response = await axios.get(
-        `http://localhost:${process.env.PORT}/user/${post.userId}`
+        `/user/${post.userId}`
       );
       setUsername(response.data.name);
     };
