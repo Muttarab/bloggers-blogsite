@@ -16,9 +16,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
-app.listen(PORT, function () {
-  console.log("Server started.......");
-})
-// const server = app.listen(PORT, "localhost", function () {
-//   console.log(`Blog App listening at http://localhost:${PORT}`);
-// });
+
+const server = app.listen(PORT, "localhost", function () {
+  console.log(`Blog App listening at http://localhost:${PORT}`);
+});
