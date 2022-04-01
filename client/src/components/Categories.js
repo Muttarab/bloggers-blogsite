@@ -26,6 +26,9 @@ const useStyle = makeStyles({
     data2: {
         textAlign: 'center',
         marginLeft: -50,
+    },
+    createb:{
+        marginLeft:'16px'
     }
 })
 
@@ -45,7 +48,7 @@ const Categories = () => {
     const borderRemove = { textDecoration: 'none' }
     return (
         <>
-            <Link to='createpost' style={borderRemove}>
+            <Link to='createpost' style={borderRemove} className={classes.createb}>
                 <Button variant="contained" className='button' style={{ fontSize: '18px' }} >Create Blog</Button>
             </Link>
             <nav class="navbar navbar-default">

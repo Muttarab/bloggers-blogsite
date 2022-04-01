@@ -6,11 +6,14 @@ import { useState, useEffect } from "react";
 import Comments from "./Comments";
 import axios from "axios";
 import PushPinIcon from '@mui/icons-material/PushPin';
+import { createTheme } from '@material-ui/core/styles'
 import parse from "html-react-parser";
 const useStyle = makeStyles((theme) => ({
   container: {
+    marginTop: '100px',
     margin: "50px 100px",
     [theme.breakpoints.down("md")]: {
+      marginTop: '100px',
       margin: 0,
     },
   },
@@ -94,6 +97,8 @@ const PostDetail = ({ match }) => {
       console.log("Error while calling deletePost API ", error);
     }
   };
+  var div = document.createElement("div");
+  div.innerHTML = postdata.description;
   return (
     <Box className={classes.container}>
       <img src={url} alt="banner" className={classes.image} />
@@ -122,7 +127,7 @@ const PostDetail = ({ match }) => {
           {new Date(postdata.createdAt).toDateString()}
         </Typography>
       </Box>
-      <Typography><PushPinIcon color="primary" className={classes.editIcon}/>{postdata.description}</Typography>
+      <Typography><PushPinIcon color="primary" className={classes.editIcon} />{div.innerText}</Typography>
       <Comments postdata={postdata} />
     </Box>
   );

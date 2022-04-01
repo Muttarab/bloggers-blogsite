@@ -13,7 +13,7 @@ const useStyle = makeStyles(theme => ({
     container: {
         margin: '100px 110px',
         [theme.breakpoints.down('md')]: {
-            marginTop: 110,
+            marginTop: 130,
         },
     },
     text1: {
@@ -21,7 +21,7 @@ const useStyle = makeStyles(theme => ({
         width: '30%',
     },
     paddingadd: {
-        padding: '10px 20px',
+        padding: '14px 0px',
         borderBottom: "1px solid gray",
         border: "none",
         backgroundColor: "#F0F0F0",
@@ -37,7 +37,7 @@ const useStyle = makeStyles(theme => ({
         border: '4px solid #E6C8C5',
     },
     spanstyle: { color: "red", marginTop: "10px" },
-    addIcon: { width: "90%" },
+    addIcon: { width: "100%" },
 }));
 const initialUserprofile = {
     gender: '',
@@ -143,7 +143,7 @@ const CreateUserprofile = () => {
                                 <input defaultValue={userprofiledata.bio} name='bio' multiline rows={4} onChange={(e) => handleChange(e)} placeholder="Type your bio here" variant="outlined" fullWidth className={classes.paddingadd} />
                             </Grid>
                             <Grid item xs={7}>
-                                <Button onClick={saveUserprofile} disabled={isFetching} variant="contained" color="primary" style={{ width: '117%' }}>Save Changes</Button>
+                                <Button onClick={saveUserprofile} disabled={isFetching} variant="contained" color="primary" style={{ width: '100%' }}>Save Changes</Button>
                             </Grid>
                         </Grid>
                         {error && <Alert severity="error">

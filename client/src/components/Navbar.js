@@ -174,8 +174,8 @@ const Navbar = () => {
                 <Tooltip title={user.name.toUpperCase()}>
                   <Avatar src={imgbefore} sx={{
                     display: 'inline-block',
-                    width: 50,
-                    height: 50,
+                    width: '30px',
+                    height: '30px',
                   }} />
                 </Tooltip>
               </>
