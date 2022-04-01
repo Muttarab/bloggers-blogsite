@@ -5,7 +5,6 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
-import { useHistory } from 'react-router-dom';
 import { userprofileFailure, userprofileStart, userprofileSuccess } from "../redux/userprofileRedux";
 const useStyle = makeStyles(theme => ({
     Userprofile: {

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Box, makeStyles, TextareaAutosize, Button, FormControl } from '@material-ui/core';
-import { AddCircle as Add } from '@material-ui/icons';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';

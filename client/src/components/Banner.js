@@ -19,19 +19,6 @@ const useStyle = makeStyles({
             lineHeight: 1,
             transition: '0.5s',
         },
-        // '& :first-child:hover' :{
-        //    transition:'0.5s',
-        //    transform:'scale(1.1)',
-        //    color:'#000000'
-
-        // },
-        // '& :last-child': {
-        //     width:480,
-        //     fontSize: 40,
-        //     marginLeft:820,
-        //     marginTop:-398,
-        //     color:'white',
-        // }
     },
 })
 
