@@ -1,4 +1,3 @@
-
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv")
@@ -14,8 +13,6 @@ app.use(bodyParser.json());
 app.use("/", routes);
 app.use(express.static('./images'));
 app.use(express.static(path.join(__dirname, 'build')));
-
-
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
