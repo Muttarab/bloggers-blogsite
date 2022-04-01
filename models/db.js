@@ -1,8 +1,8 @@
 const Sequelize = require("sequelize");
-const path=require('path')
-require('dotenv').config();
+
 const env = process.env.NODE_ENV || "development";
-const config = require(path.join(__dirname, '../config/config.js'))
+const config = require(`../config/config.js`)[env];
+
 const db = {};
 let sequelize;
 if (config.use_env_variable) {
@@ -15,4 +15,10 @@ if (config.use_env_variable) {
     config
   );
 }
+// db.Post = require("./post")(sequelize, Sequelize.DataTypes);
+// console.log(db, "@db");
+// db.Post.associate(db);
+
+// db.sequelize = sequelize;
+// db.Sequelize = Sequelize;
 module.exports = sequelize;
