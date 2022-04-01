@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import Comments from "./Comments";
 import axios from "axios";
 import PushPinIcon from '@mui/icons-material/PushPin';
-
+import parse from "html-react-parser";
 const useStyle = makeStyles((theme) => ({
   container: {
     margin: "50px 100px",
