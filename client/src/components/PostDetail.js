@@ -6,8 +6,6 @@ import { useState, useEffect } from "react";
 import Comments from "./Comments";
 import axios from "axios";
 import PushPinIcon from '@mui/icons-material/PushPin';
-import { EditLocation } from "@material-ui/icons";
-import parse from "html-react-parser";
 
 const useStyle = makeStyles((theme) => ({
   container: {
@@ -124,7 +122,7 @@ const PostDetail = ({ match }) => {
           {new Date(postdata.createdAt).toDateString()}
         </Typography>
       </Box>
-       <Typography><PushPinIcon color="primary" className={classes.editIcon}/>{parse(postdata.description)}</Typography>
+      <Typography><PushPinIcon color="primary" className={classes.editIcon} />{postdata.description}</Typography>
       <Comments postdata={postdata} />
     </Box>
   );
