@@ -106,7 +106,7 @@ const CreateUserprofile = () => {
     return (
         <div className="Userprofile">
             <Grid className={classes.container}>
-                <Card style={{ maxWidth: 450, padding: "20px 5px", margin: "0 auto" }}>
+                <Card style={{ maxWidth: 450, padding: "20px -1px", margin: "0 auto" }}>
                     <CardContent>
                         <Typography gutterBottom variant="h5" className={classes.text1}>
                             User Profile
@@ -143,7 +143,7 @@ const CreateUserprofile = () => {
                                 <input defaultValue={userprofiledata.bio} name='bio' multiline rows={4} onChange={(e) => handleChange(e)} placeholder="Type your bio here" variant="outlined" fullWidth className={classes.paddingadd} />
                             </Grid>
                             <Grid item xs={7}>
-                                <Button onClick={saveUserprofile} disabled={isFetching} variant="contained" color="primary" style={{ width: '107%' }}>Save Changes</Button>
+                                <Button onClick={saveUserprofile} disabled={isFetching} variant="contained" color="primary" style={{ width: '117%' }}>Save Changes</Button>
                             </Grid>
                         </Grid>
                         {error && <Alert severity="error">
