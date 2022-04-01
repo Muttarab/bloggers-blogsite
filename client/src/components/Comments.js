@@ -80,20 +80,20 @@ const Comments = ({ postdata }) => {
   useEffect(() => {
     const getData = async () => {
       const response = await axios.get(
-        `http://localhost:8000/comment/${postdata.id}`
+        `http://localhost:${process.env.PORT}/comment/${postdata.id}`
       );
       setComments(response.data);
     };
     getData();
     const getlikeData = async () => {
       const response = await axios.get(
-        `http://localhost:8000/like/${postdata.id}`
+        `http://localhost:${process.env.PORT}/like/${postdata.id}`
       );
       const object = {};
       let i = 0;
       while (i < response.data.length) {
         const str = response.data[i].userId;
-        const responsed = await axios.get(`http://localhost:8000/user/${str}`);
+        const responsed = await axios.get(`http://localhost:${process.env.PORT}/user/${str}`);
         object[`ptr` + i] = responsed.data.name;
         i++;
       }
@@ -105,7 +105,7 @@ const Comments = ({ postdata }) => {
     getlikeData();
     const checkUserlike = async () => {
       const response = await axios.get(
-        `http://localhost:8000/like/${user.id}/${postdata.id}`
+        `http://localhost:${process.env.PORT}/like/${user.id}/${postdata.id}`
       );
       if (response.data.length > 0) {
         setLiked(response.data.length);
@@ -123,7 +123,7 @@ const Comments = ({ postdata }) => {
   };
   const likeunlikepost = async () => {
     const response = await axios.post(
-      `http://localhost:8000/like/${user.id}/${postdata.id}`,
+      `http://localhost:${process.env.PORT}/like/${user.id}/${postdata.id}`,
       {
         headers: {
           Authorization:
@@ -140,7 +140,7 @@ const Comments = ({ postdata }) => {
     dispatch(commentStart());
     try {
       const result = await axios.post(
-        `http://localhost:8000/comment/${user.id}/${postdata.id}/create`,
+        `http://localhost:${process.env.PORT}/comment/${user.id}/${postdata.id}/create`,
         { commenttext },
         {
           headers: {

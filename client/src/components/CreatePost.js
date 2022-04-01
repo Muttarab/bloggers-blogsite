@@ -108,7 +108,7 @@ const CreatePost = () => {
             data.append("picture", image);
             data.append("title", postdata.title);
             data.append("description", editorRef.current.getContent());
-            const result = await axios.post(`http://localhost:8000/post/${userid}/${category}/create`,
+            const result = await axios.post(`http://localhost:${process.env.PORT}/post/${userid}/${category}/create`,
                 data, {
                 headers: {
                     Authorization: "Bearer " + JSON.parse(localStorage.getItem('currentUser')).accesstoken

@@ -85,7 +85,7 @@ const UpdatePost = ({ match }) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get(`http://localhost:8000/post/${match.params.id}`)
+            const response = await axios.get(`http://localhost:${process.env.PORT}/post/${match.params.id}`)
             setPostdata({ title: response.data.title, description: response.data.description, picture: response.data.picture })
             if (response.data.userId !== userid) {
                 history.push('/')
@@ -108,7 +108,7 @@ const UpdatePost = ({ match }) => {
             data.append("picture", postdata.picture);
             data.append("title", postdata.title);
             data.append("description",editorRef.current.getContent());
-            const result = await axios.put(`http://localhost:8000/post/${match.params.id}/update`,
+            const result = await axios.put(`http://localhost:${process.env.PORT}/post/${match.params.id}/update`,
                 data, {
                 headers: {
                     Authorization: "Bearer " + JSON.parse(localStorage.getItem('currentUser')).accesstoken
@@ -122,7 +122,7 @@ const UpdatePost = ({ match }) => {
             dispatch(postFailure());
         }
     };
-    const url = imageurlafter ? imageurlafter : `http://localhost:8000/${imageurl.slice(7,)}`
+    const url = imageurlafter ? imageurlafter : `http://localhost:${process.env.PORT}/${imageurl.slice(7,)}`
     return (
         <>
             <Box className={classes.container}>

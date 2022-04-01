@@ -11,14 +11,14 @@ const Posts = () =>{
     useEffect(() => {
         if (!category || category === '') {
             const fetchData = async () => {
-                const response = await axios.get("http://localhost:8000/post/getAll")
+                const response = await axios.get(`http://localhost:${process.env.PORT}/post/getAll`)
                 setPostdata(response.data);
             }
             fetchData()
         }
         else {
             const fetchDatabyCategory = async () => {
-                const response = await axios.get(`http://localhost:8000/post/category/${category}`)
+                const response = await axios.get(`http://localhost:${process.env.PORT}/post/category/${category}`)
                 setPostdata(response.data);
             }
             fetchDatabyCategory()

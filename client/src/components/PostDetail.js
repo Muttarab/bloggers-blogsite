@@ -5,9 +5,7 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import Comments from "./Comments";
 import axios from "axios";
-import { PinDrop } from "@material-ui/icons";
 import PushPinIcon from '@mui/icons-material/PushPin';
-import { EditLocation } from "@material-ui/icons";
 
 const useStyle = makeStyles((theme) => ({
   container: {
@@ -66,7 +64,7 @@ const PostDetail = ({ match }) => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        `http://localhost:8000/post/${match.params.id}`
+        `http://localhost:${process.env.PORT}/post/${match.params.id}`
       );
       setPostdata(response.data);
       setUsername(response.data.User.name);
@@ -77,12 +75,12 @@ const PostDetail = ({ match }) => {
       setFlag(true);
     }
   }, []);
-  const url = `http://localhost:8000/${imageurl.slice(7)}`;
+  const url = `http://localhost:${process.env.PORT}/${imageurl.slice(7)}`;
   const deleteBlog = async (e) => {
     e.preventDefault();
     try {
       await axios.delete(
-        `http://localhost:8000/post/${match.params.id}/delete`,
+        `http://localhost:${process.env.PORT}/post/${match.params.id}/delete`,
         {
           headers: {
             Authorization:
