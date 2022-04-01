@@ -106,7 +106,7 @@ const CreateUserprofile = () => {
     return (
         <div className="Userprofile">
             <Grid className={classes.container}>
-                <Card style={{ maxWidth: 450, padding: "20px -1px", margin: "0 auto" }}>
+                <Card style={{ maxWidth: 450, padding: "20px 0px", margin: "0 auto" }}>
                     <CardContent>
                         <Typography gutterBottom variant="h5" className={classes.text1}>
                             User Profile

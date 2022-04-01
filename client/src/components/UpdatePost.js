@@ -141,7 +141,6 @@ const UpdatePost = ({ match }) => {
                     <Button onClick={() => savePost()} disabled={isFetching} variant="contained" color="primary">Publish</Button>
                 </FormControl>
                 <Editor
-                defaultValue={postdata.description}
                 onInit={(evt, editor) => editorRef.current = editor}
                 name='description'
                 />
