@@ -1,23 +1,29 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Button from '@mui/material/Button';
 import AppBar from '@mui/material/AppBar';
+import HomeIcon from '@mui/icons-material/Home';
+import LoginIcon from '@mui/icons-material/Login';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import InfoIcon from '@mui/icons-material/Info';
 import Menu from '@mui/material/Menu';
 import { makeStyles, Tooltip } from '@material-ui/core';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import MenuItem from '@mui/material/MenuItem';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import logo from '../images/logo.png';
 import { Link } from 'react-router-dom';
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import LogoutIcon from '@mui/icons-material/Logout';
+import MenuItem from '@mui/material/MenuItem';
+import PersonIcon from '@mui/icons-material/Person';
 const useStyle = makeStyles(theme => ({
   component: {
     background: '#F5EBEB !important',
@@ -37,6 +43,9 @@ const useStyle = makeStyles(theme => ({
     marginLeft: 40,
     marginRight: 20,
     padding: 20,
+  },
+  menuicon: {
+    color: 'black'
   }
 }))
 const Navbar = () => {
@@ -57,79 +66,78 @@ const Navbar = () => {
     localStorage.clear();
     history.push('/login')
   }
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleClose = () => {
+    setAnchorEl(null);
   };
   return (
     <AppBar className={classes.component}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography variant="h6" noWrap component="div" sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>
-            <img src={logo} height={90} width={120} />
-          </Typography>
+          <Link to='/' className={classes.link}>
+            <Typography variant="h6" noWrap component="div" sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>
+              <img src={logo} height={90} width={120} />
+            </Typography>
+          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
+            <Button
+              id="basic-button"
+              aria-controls={open ? 'basic-menu' : undefined}
               aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
+              aria-expanded={open ? 'true' : undefined}
+              onClick={handleClick}
             >
-              <MenuIcon />
-            </IconButton>
+              <MenuIcon className={classes.menuicon} />
+            </Button>
             <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                'aria-labelledby': 'basic-button',
               }}
             >
-              <Link to='/' className={classes.link2}>
-                <Typography>HOME</Typography>
-              </Link>
-              <Link to='/about' className={classes.link2}>
-                <Typography>ABOUT</Typography>
-              </Link>
-              {user ?
-                <>
-                  <Link to='/createuserprofile' className={classes.link2}>
-                    <Typography>PROFILE</Typography>
-                  </Link>
-                  <Link onClick={logout} to='/login' className={classes.link2} >
-                    <Typography>SIGN OUT</Typography>
-                  </Link>
-                </> :
-                <>
-                  <Link to='/login' className={classes.link2}>
-                    <Typography>LOGIN</Typography>
-                  </Link>
-                  <Link to='/register' className={classes.link2}>
-                    <Typography>REGISTER</Typography>
-                  </Link>
-                </>
+              <MenuItem component={Link} to="/" onClick={handleClose}>
+                <ListItemIcon>
+                  <HomeIcon fontSize="small" />
+                </ListItemIcon>
+                HOME</MenuItem>
+              <MenuItem component={Link} to="/about" onClick={handleClose}>
+                <ListItemIcon>
+                  <InfoIcon fontSize="small" />
+                </ListItemIcon>
+                ABOUT</MenuItem>
+              {
+                user ?
+                  <>
+                    <MenuItem component={Link} to="/createuserprofile" onClick={handleClose}>
+                      <ListItemIcon>
+                        <PersonIcon fontSize="small" />
+                      </ListItemIcon>
+                      PROFILE</MenuItem>
+                    <MenuItem component={Link} onClick={logout} to="/login" >
+                      <ListItemIcon>
+                        <LogoutIcon fontSize="small" />
+                      </ListItemIcon>
+                      LOGOUT</MenuItem>
+                  </> :
+                  <>
+                    <MenuItem component={Link} to="/login" onClick={handleClose}>
+                      <ListItemIcon>
+                        <LoginIcon fontSize="small" />
+                      </ListItemIcon>
+                      LOGIN</MenuItem>
+                    <MenuItem component={Link} to="/register" onClick={handleClose}>
+                      <ListItemIcon>
+                        <HowToRegIcon fontSize="small" />
+                      </ListItemIcon>
+                      REGISTER</MenuItem>
+                  </>
               }
             </Menu>
           </Box>
@@ -154,7 +162,7 @@ const Navbar = () => {
                   <Typography>PROFILE</Typography>
                 </Link>
                 <Link onClick={logout} to='/login' className={classes.link}>
-                  <Typography>SIGN OUT</Typography>
+                  <Typography>LOGOUT</Typography>
                 </Link>
                 <Avatar alt="No Avatar" src={imgbefore} sx={{ display: 'none' }} />
               </> :
@@ -171,41 +179,21 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             {user ?
               <>
-                <Tooltip title={user.name.toUpperCase()}>
-                  <Avatar src={imgbefore} sx={{
-                    display: 'inline-block',
-                    width: '34px',
-                    height: '34px',
-                  }} />
-                </Tooltip>
+                <Link to='/createuserprofile' className={classes.link}>
+                  <Tooltip title={user.name.toUpperCase()}>
+                    <Avatar src={imgbefore} sx={{
+                      display: 'inline-block',
+                      width: '34px',
+                      height: '34px',
+                    }} />
+                  </Tooltip>
+                </Link>
               </>
               :
               <Link to='/login' className={classes.link}>
                 <Typography><AccessibilityNewIcon /></Typography>
               </Link>
             }
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center" >{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
         </Toolbar>
       </Container>
