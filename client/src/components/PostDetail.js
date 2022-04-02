@@ -6,8 +6,6 @@ import { useState, useEffect } from "react";
 import Comments from "./Comments";
 import axios from "axios";
 import PushPinIcon from '@mui/icons-material/PushPin';
-import { createTheme } from '@material-ui/core/styles'
-import parse from "html-react-parser";
 const useStyle = makeStyles((theme) => ({
   container: {
     marginTop: '100px',
@@ -101,7 +99,7 @@ const PostDetail = ({ match }) => {
   div.innerHTML = postdata.description;
   return (
     <Box className={classes.container}>
-      <img src={url} alt="banner" className={classes.image} />
+      <img src={url} alt="no blogpost-image" className={classes.image} />
       {flag ? (
         user.id === postdata.userId ? (
           <Box className={classes.icons}>

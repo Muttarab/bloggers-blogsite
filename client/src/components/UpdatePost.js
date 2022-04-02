@@ -12,9 +12,11 @@ import '../index.css'
 import { Editor } from "@tinymce/tinymce-react";
 const useStyle = makeStyles(theme => ({
     container: {
-        margin: '50px 100px',
-        [theme.breakpoints.down('md')]: {
-            margin: 0
+        marginTop: '100px',
+        margin: "50px 100px",
+        [theme.breakpoints.down("md")]: {
+            marginTop: '100px',
+            margin: 0,
         },
     },
     picture: {
@@ -106,7 +108,7 @@ const UpdatePost = ({ match }) => {
             const data = new FormData();
             data.append("picture", postdata.picture);
             data.append("title", postdata.title);
-            data.append("description",editorRef.current.getContent());
+            data.append("description", editorRef.current.getContent());
             const result = await axios.put(`/post/${match.params.id}/update`,
                 data, {
                 headers: {
@@ -125,7 +127,7 @@ const UpdatePost = ({ match }) => {
     return (
         <>
             <Box className={classes.container}>
-                <img src={url} alt="banner" className={classes.picture} />
+                <img src={url} alt="no blogpost-image" className={classes.picture} />
                 <FormControl className={classes.form}>
                     <label htmlFor="fileInput">
                         <Attachment className={classes.addIcon} fontSize="large" color="action" />
@@ -141,11 +143,10 @@ const UpdatePost = ({ match }) => {
                     <Button onClick={() => savePost()} disabled={isFetching} variant="contained" color="primary">Publish</Button>
                 </FormControl>
                 <Editor
-                onInit={(evt, editor) => editorRef.current = editor}
-                name='description'
+                    onInit={(evt, editor) => editorRef.current = editor}
+                    name='description'
                 />
                 {/* <TextareaAutosize
-
                     rowsMin={5}
                     name='description'
                     placeholder="Start Writing!"
