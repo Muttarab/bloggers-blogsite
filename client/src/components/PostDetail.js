@@ -58,6 +58,7 @@ const PostDetail = ({ match }) => {
   const [postdata, setPostdata] = useState({});
   const [flag, setFlag] = useState(false);
   const [username, setUsername] = useState("");
+  const [image, setImage] = useState("");
   const user = useSelector((state) => state.user.currentUser);
   const [imageurl, setImageurl] = useState("");
   const history = useHistory();
@@ -77,6 +78,21 @@ const PostDetail = ({ match }) => {
     }
   }, []);
   const url = `/${imageurl.slice(7)}`;
+  const getBase64FromUrl = async (url) => {
+    const data = await fetch(url);
+    const blob = await data.blob();
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(blob); 
+      reader.onloadend = () => {
+        const base64data = reader.result;   
+        resolve(base64data);
+      }
+    });
+  }
+  getBase64FromUrl(url).then(value=>{
+    setImage(value);
+  })
   const deleteBlog = async (e) => {
     e.preventDefault();
     try {
@@ -99,7 +115,7 @@ const PostDetail = ({ match }) => {
   div.innerHTML = postdata.description;
   return (
     <Box className={classes.container}>
-      <img src={url} alt="no blogpost-image" className={classes.image} />
+      <img src={image} alt="no blogpost-image" className={classes.image} />
       {flag ? (
         user.id === postdata.userId ? (
           <Box className={classes.icons}>
