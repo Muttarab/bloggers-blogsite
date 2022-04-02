@@ -85,7 +85,7 @@ const Navbar = () => {
         }
         {user ?
           <>
-            <Link to='/' className={classes.linkhide}>
+            <Link to='/createuserprofile' className={classes.linkhide}>
               <Tooltip title={user.name.toUpperCase()}>
                 <Avatar src={imgbefore} sx={{ display: 'block', height: '65px', width: '63px', marginLeft: '650px' }} />
               </Tooltip>
