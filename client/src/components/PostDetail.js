@@ -8,7 +8,7 @@ import axios from "axios";
 import PushPinIcon from '@mui/icons-material/PushPin';
 const useStyle = makeStyles((theme) => ({
   container: {
-    marginTop: '100px',
+    marginTop: '112px',
     margin: "50px 100px",
     [theme.breakpoints.down("md")]: {
       marginTop: '100px',

@@ -12,7 +12,7 @@ import '../index.css'
 import { Editor } from "@tinymce/tinymce-react";
 const useStyle = makeStyles(theme => ({
     container: {
-        marginTop: '100px',
+        marginTop: '112px',
         margin: "50px 100px",
         [theme.breakpoints.down("md")]: {
             marginTop: '100px',

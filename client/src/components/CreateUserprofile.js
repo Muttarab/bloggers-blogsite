@@ -11,7 +11,7 @@ const useStyle = makeStyles(theme => ({
         fontFamily: "Quicksand"
     },
     container: {
-        margin: '100px 110px',
+        margin: '130px 110px',
         [theme.breakpoints.down('md')]: {
             marginTop: 130,
         },
@@ -25,7 +25,7 @@ const useStyle = makeStyles(theme => ({
         borderBottom: "1px solid gray",
         border: "none",
         backgroundColor: "#F0F0F0",
-        width: '100%'
+        width: 'auto'
     },
     picture: {
         textAlign: 'center',
@@ -38,6 +38,7 @@ const useStyle = makeStyles(theme => ({
     },
     spanstyle: { color: "red", marginTop: "10px" },
     addIcon: { width: "100%" },
+    paperStyle: { marginTop: 115, padding: 20, height: '70vh', width: 280, margin: "20px auto" },
 }));
 const initialUserprofile = {
     gender: '',
@@ -104,8 +105,8 @@ const CreateUserprofile = () => {
         }
     };
     return (
-        <div className="Userprofile">
-            <Grid className={classes.container}>
+        <Grid>
+            <Grid className={classes.paperStyle}>
                 <Card style={{ maxWidth: 450, padding: "20px -1px", margin: "0 auto" }}>
                     <CardContent>
                         <Typography gutterBottom variant="h5" className={classes.text1}>
@@ -154,7 +155,7 @@ const CreateUserprofile = () => {
                     </CardContent>
                 </Card>
             </Grid>
-        </div>
+            </Grid>
     )
 }
 export default CreateUserprofile;

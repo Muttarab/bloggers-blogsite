@@ -7,7 +7,7 @@ import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
-    paperStyle: { marginTop: 115, padding: 20, height: '70vh', width: 280, margin: "20px auto" },
+    paperStyle: { marginTop: 135, padding: 20, height: '70vh', width: 280, margin: "20px auto" },
     headerStyle: { margin: 0 },
     avatarStyle: { backgroundColor: '#1bbd7e', marginBottom: "21px" },
     btnstyle: { margin: '8px 0' },
@@ -50,7 +50,7 @@ const Register = () => {
                     <Avatar className={classes.avatarStyle}>
                         <CreateIcon />
                     </Avatar>
-                    <h2 className={classes.headerStyle}>Sign up</h2>
+                    <h2 className={classes.headerStyle}>Sign Up</h2>
                     <Typography variant='caption' gutterBottom>Please fill this form to create an account!</Typography>
                 </Grid>
                 <form onSubmit={handleSubmit}>
