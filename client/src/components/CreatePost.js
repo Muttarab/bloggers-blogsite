@@ -123,7 +123,7 @@ const CreatePost = () => {
             dispatch(postSuccess(result.data));
             history.push('/')
         } catch (err) {
-            alert('Post not Created, Select a Category and Choose Image to Post!')
+            alert('Post not Created, Select a Category to Post!')
             dispatch(postFailure());
         }
     };
@@ -178,7 +178,7 @@ const CreatePost = () => {
                 {error &&
                     <Alert severity="error">
                         <AlertTitle>Post not Created</AlertTitle>
-                        Select a Category and Choose Image to Post!
+                        Select a Category to Post!
                     </Alert>
                 }
             </Box>
