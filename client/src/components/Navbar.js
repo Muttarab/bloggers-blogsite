@@ -37,15 +37,13 @@ const useStyle = makeStyles(theme => ({
     marginRight: 20,
     padding: 10
   },
-  link2: {
-    textDecoration: 'none',
-    color: 'inherit',
-    marginLeft: 40,
-    marginRight: 20,
-    padding: 20,
-  },
   menuicon: {
     color: 'black'
+  },
+  linklogohome:{
+    textDecoration: 'none',
+    color: 'inherit',
+    marginRight:'12px'
   }
 }))
 const Navbar = () => {
@@ -78,7 +76,7 @@ const Navbar = () => {
     <AppBar className={classes.component}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link to='/' className={classes.link}>
+          <Link to='/' className={classes.linklogohome}>
             <Typography variant="h6" noWrap component="div" sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>
               <img src={logo} height={90} width={120} />
             </Typography>
