@@ -7,15 +7,6 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import { userprofileFailure, userprofileStart, userprofileSuccess } from "../redux/userprofileRedux";
 const useStyle = makeStyles(theme => ({
-    Userprofile: {
-        fontFamily: "Quicksand"
-    },
-    container: {
-        margin: '100px 110px',
-        [theme.breakpoints.down('md')]: {
-            marginTop: 130,
-        },
-    },
     text1: {
         borderBottom: "2px solid #DBD7D7",
         width: '30%',
@@ -25,7 +16,7 @@ const useStyle = makeStyles(theme => ({
         borderBottom: "1px solid gray",
         border: "none",
         backgroundColor: "#F0F0F0",
-        width: '100%'
+        width: 'auto'
     },
     picture: {
         textAlign: 'center',
@@ -36,8 +27,10 @@ const useStyle = makeStyles(theme => ({
         boxShadow: 'rgb(0 0 1 / 30%) 0px 5px 10px',
         border: '4px solid #E6C8C5',
     },
+    btnstyle: {width:'108%' },
     spanstyle: { color: "red", marginTop: "10px" },
     addIcon: { width: "100%" },
+    paperStyle: { marginTop: 140, padding: 20, height: '70vh', width: 320, margin: "20px auto" },
 }));
 const initialUserprofile = {
     gender: '',
@@ -108,14 +101,13 @@ const CreateUserprofile = () => {
         setUserprofiledata({ ...userprofiledata, [e.target.name]: e.target.value });
     }
     return (
-        <div className="Userprofile">
-            <Grid className={classes.container}>
-                <Card style={{ maxWidth: 450, padding: "20px -1px", margin: "0 auto" }}>
+            <Grid className={classes.paperStyle}>
+                <Card>
                     <CardContent>
-                        <Typography gutterBottom variant="h5" className={classes.text1}>
+                        <Typography gutterBottom variant="h6" className={classes.text1}>
                             User Profile
                         </Typography>
-                        <Grid container spacing={1} justifyContent="center" alignItems="center">
+                        <Grid container spacing={1} justifyContent="center" alignItems="auto">
                             <Grid xs={7} item >
                                 <img src={imageurl ? imageurl : userprofiledata.picture} alt="No Profile Picture" className={classes.picture} />
                                 <label htmlFor="fileInput">
@@ -149,7 +141,7 @@ const CreateUserprofile = () => {
                                 <input defaultValue={userprofiledata.bio} name='bio' multiline rows={4} onChange={(e) => handleChange(e)} placeholder="Type your bio here" variant="outlined" fullWidth className={classes.paddingadd} />
                             </Grid>
                             <Grid item xs={7}>
-                                <Button onClick={saveUserprofile} disabled={isFetching} variant="contained" color="primary" style={{ width: '100%' }}>Save Changes</Button>
+                                <Button onClick={saveUserprofile} disabled={isFetching} variant="contained" color="primary" className={classes.btnstyle}>Save Changes</Button>
                             </Grid>
                         </Grid>
                         {error && <Alert severity="error">
@@ -160,7 +152,6 @@ const CreateUserprofile = () => {
                     </CardContent>
                 </Card>
             </Grid>
-        </div>
     )
 }
 export default CreateUserprofile;
