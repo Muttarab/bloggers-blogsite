@@ -92,8 +92,24 @@ const CreateUserprofile = () => {
             }
             createUserprofile()
         }).catch(() => {
-            alert('Profile not Saved, Something went Wrong!')
-            dispatch(userprofileFailure());
+            const createUserprofile = async () => {
+                dispatch(userprofileStart());
+                const result = await axios.post(`/userprofile/${userid}`,
+                    { picture: userprofiledata.picture? userprofiledata.picture:'', gender: userprofiledata.gender, phonenumber: userprofiledata.phonenumber, bio: userprofiledata.bio }, {
+                    headers: {
+                        Authorization: "Bearer " + JSON.parse(localStorage.getItem('currentUser')).accesstoken
+                    }
+                }
+                );
+                if (result.data) {
+                    dispatch(userprofileSuccess(result.data));
+                    alert('User Profile Saved Successfully!');
+                } else {
+                    alert('Profile not Saved, Something went Wrong!')
+                    dispatch(userprofileFailure());
+                }
+            }
+            createUserprofile()
         }
         )
     }
