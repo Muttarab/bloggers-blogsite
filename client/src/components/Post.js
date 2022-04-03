@@ -82,7 +82,7 @@ const Post = ({ post }) => {
         <b>Author:</b> {username}
       </Typography>
       <Clamp withTooltip lines={4}>
-      <Typography className={classes.clamp}>{parse(post.description)}</Typography>
+        <Typography className={classes.clamp}>{parse(post.description)}</Typography>
       </Clamp>
     </Box>
   );

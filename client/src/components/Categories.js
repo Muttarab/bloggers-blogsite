@@ -18,7 +18,7 @@ const useStyle = makeStyles({
         color: "gray",
     },
     data: {
-        textAlign:'center',
+        textAlign: 'center',
         fontSize: 25,
         marginTop: 10,
         fontWeight: 600,
@@ -27,8 +27,8 @@ const useStyle = makeStyles({
         textAlign: 'center',
         marginLeft: -50,
     },
-    createb:{
-        marginLeft:'16px'
+    createb: {
+        marginLeft: '16px'
     }
 })
 

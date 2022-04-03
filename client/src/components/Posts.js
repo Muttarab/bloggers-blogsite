@@ -5,7 +5,7 @@ import Post from '../components/Post';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-const Posts = () =>{
+const Posts = () => {
     const [postdata, setPostdata] = useState([]);
     const category = useSelector((state) => state.category.currentCategory);
     useEffect(() => {

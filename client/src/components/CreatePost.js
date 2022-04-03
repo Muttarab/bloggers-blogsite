@@ -112,7 +112,7 @@ const CreatePost = () => {
                         }
                     }
                     );
-                    if(result.data){
+                    if (result.data) {
                         dispatch(postSuccess(result.data));
                         history.push('/')
                     }

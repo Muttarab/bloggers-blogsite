@@ -2,7 +2,7 @@ import React from 'react'
 import { Grid, Paper, Avatar, TextField, Button, Typography, makeStyles, Box } from '@material-ui/core'
 import LoginIcon from '@mui/icons-material/Login';
 import { Link, useHistory } from 'react-router-dom';
-import { useState ,useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginFailure, loginStart, loginSuccess } from "../redux/userRedux";
@@ -46,22 +46,22 @@ const Login = () => {
     };
     return (
         <Grid>
-        <Paper elevation={10} className={classes.paperStyle}>
-            <Grid align='center'>
-                <Avatar className={classes.avatarStyle}><LoginIcon /></Avatar>
-                <h2>Sign In</h2>
-            </Grid>
-            <TextField label='Email' placeholder='Enter email' type='email' onChange={(e) => setEmail(e.target.value)} fullWidth required />
-            <TextField label='Password' placeholder='Enter password' type='password' onChange={(e) => setPassword(e.target.value)} fullWidth required />
-            <Button  color='primary' onClick={handleSubmit} disabled={isFetching} variant="contained" className={classes.btnstyle} fullWidth>Sign in</Button>
-            {error && <Box component="span" className={classes.spanstyle}>Email or Password is Incorrect!</Box>}
-            <Typography > Do you have an account?
-                <Link to="/register">
-                    Register
-                </Link>
-            </Typography>
-        </Paper>
-    </Grid>
+            <Paper elevation={10} className={classes.paperStyle}>
+                <Grid align='center'>
+                    <Avatar className={classes.avatarStyle}><LoginIcon /></Avatar>
+                    <h2>Sign In</h2>
+                </Grid>
+                <TextField label='Email' placeholder='Enter email' type='email' onChange={(e) => setEmail(e.target.value)} fullWidth required />
+                <TextField label='Password' placeholder='Enter password' type='password' onChange={(e) => setPassword(e.target.value)} fullWidth required />
+                <Button color='primary' onClick={handleSubmit} disabled={isFetching} variant="contained" className={classes.btnstyle} fullWidth>Sign in</Button>
+                {error && <Box component="span" className={classes.spanstyle}>Email or Password is Incorrect!</Box>}
+                <Typography > Do you have an account?
+                    <Link to="/register">
+                        Register
+                    </Link>
+                </Typography>
+            </Paper>
+        </Grid>
     )
 }
 

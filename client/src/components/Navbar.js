@@ -40,10 +40,10 @@ const useStyle = makeStyles(theme => ({
   menuicon: {
     color: 'black'
   },
-  linklogohome:{
+  linklogohome: {
     textDecoration: 'none',
     color: 'inherit',
-    marginRight:'12px'
+    marginRight: '12px'
   }
 }))
 const Navbar = () => {
@@ -139,14 +139,14 @@ const Navbar = () => {
             </Menu>
           </Box>
           <Link to='/' className={classes.linklogohome}>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-          >
-            <img src={logo} height={90} width={120} />
-          </Typography>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+            >
+              <img src={logo} height={90} width={120} />
+            </Typography>
           </Link>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Link to='/' className={classes.link}>

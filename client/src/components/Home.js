@@ -2,7 +2,7 @@ import Banner from '../components/Banner';
 import Categories from '../components/Categories'
 import Posts from '../components/Posts'
 import { Grid } from '@material-ui/core';
-const Home = () =>{
+const Home = () => {
     return (
         <>
             <Banner />
