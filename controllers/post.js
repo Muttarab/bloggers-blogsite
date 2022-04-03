@@ -57,10 +57,7 @@ exports.getAll = async function (req, res) {
 
 exports.create = async function (req, res) {
   try {
- 
-    const picture = req.file.path;
-    console.log("pic",picture)
-    const { title, description } = req.body
+    const { title, description, picture } = req.body
     const { userId, categoryId } = req.params
     return Post
       .create({
@@ -81,8 +78,7 @@ exports.create = async function (req, res) {
 
 exports.update = async function (req, res) {
   try {        
-      const picture = req.file?.path? req.file.path:""
-      const { title, description } = req.body
+      const { title, description,picture} = req.body
       return Post
         .findByPk(req.params.postId)
         .then((post) => {

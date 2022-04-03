@@ -15,8 +15,8 @@ const upload = multer({ storage: fileStorageEngine })
 router.get("/getAll", Controller.getAll);
 router.get("/:id", Controller.getPost);
 router.get("/category/:id",Controller.getPostbyCategory)
-router.post("/:userId/:categoryId/create", checkAuthMiddleware.checkAuth, upload.single('picture'), Controller.create);
+router.post("/:userId/:categoryId/create", checkAuthMiddleware.checkAuth, Controller.create);
 router.delete("/:postId/delete", checkAuthMiddleware.checkAuth,Controller.delete);
-router.put("/:postId/update", checkAuthMiddleware.checkAuth,upload.single('picture'),Controller.update);
+router.put("/:postId/update", checkAuthMiddleware.checkAuth,Controller.update);
 
 module.exports = router;

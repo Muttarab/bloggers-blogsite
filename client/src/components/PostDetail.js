@@ -76,7 +76,6 @@ const PostDetail = ({ match }) => {
       setFlag(true);
     }
   }, []);
-  const url = `/${imageurl.slice(7)}`;
   const deleteBlog = async (e) => {
     e.preventDefault();
     try {
@@ -99,7 +98,7 @@ const PostDetail = ({ match }) => {
   div.innerHTML = postdata.description;
   return (
     <Box className={classes.container}>
-      <img src={url} alt="no blogpost-image" className={classes.image} />
+      <img src={imageurl} alt="no blogpost-image" className={classes.image} />
       {flag ? (
         user.id === postdata.userId ? (
           <Box className={classes.icons}>

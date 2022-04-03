@@ -68,6 +68,7 @@ const CreatePost = () => {
     const user = useSelector((state) => state.user.currentUser);
     const [postdata, setPostdata] = useState(initialPost);
     const [imageurl, setImageurl] = useState('');
+    const [imagesel, setImagesel] = useState("");
     const [image, setImage] = useState('');
     const { isFetching, error } = useSelector((state) => state.post);
     const url = imageurl ? imageurl : 'https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80';
@@ -87,17 +88,23 @@ const CreatePost = () => {
     };
     useEffect(() => {
         const getImage = async () => {
-            if (image) {
+            if (imagesel) {
                 var reader = new FileReader();
                 reader.onloadend = function () {
                     setImageurl(reader.result)
                 }
-                reader.readAsDataURL(image);
+                reader.readAsDataURL(imagesel);
             }
         }
         getImage();
-    }, [image])
+    }, [imagesel])
     const savePost = async () => {
+        const formData=new FormData()
+        formData.append("file",imagesel)
+        formData.append("upload_preset","wknx4lzp")
+        axios.post("https://api.cloudinary.com/v1_1/dldwmaxl1/image/upload",formData).then((response)=>{
+            setImage(response.data.url)
+        })
         await createPost(dispatch, postdata);
     }
     const handleChange = (e) => {
@@ -106,12 +113,8 @@ const CreatePost = () => {
     const createPost = async (dispatch, post) => {
         dispatch(postStart());
         try {
-            const data = new FormData();
-            data.append("picture", image);
-            data.append("title", postdata.title);
-            data.append("description", editorRef.current.getContent());
             const result = await axios.post(`/post/${userid}/${category}/create`,
-                data, {
+                {picture:image,title:postdata.title,description:editorRef.current.getContent()}, {
                 headers: {
                     Authorization: "Bearer " + JSON.parse(localStorage.getItem('currentUser')).accesstoken
                 }
@@ -159,7 +162,9 @@ const CreatePost = () => {
                             type="file"
                             id="fileInput"
                             style={{ display: "none" }}
-                            onChange={(e) => setImage(e.target.files[0])}
+                            onChange={(event)=>{
+                                setImagesel(event.target.files[0]);
+                            }}
                         />
                     </Box>
                     <InputBase name='title' placeholder="Title" onChange={(e) => handleChange(e)} className={classes.textfield} />

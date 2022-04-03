@@ -66,23 +66,24 @@ const UpdatePost = ({ match }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector((state) => state.user.currentUser);
+    const [image, setImage] = useState('');
     const [postdata, setPostdata] = useState(initialPost);
     const [imageurl, setImageurl] = useState('');
-    const [imageurlafter, setImageurlafter] = useState('');
+    const [imagesel, setImagesel] = useState('');
     const { isFetching, error } = useSelector((state) => state.post);
     const userid = user.id;
     useEffect(() => {
         const getImage = async () => {
-            if (postdata.picture) {
+            if (imagesel) {
                 var reader = new FileReader();
                 reader.onloadend = function () {
-                    setImageurlafter(reader.result)
+                    setImageurl(reader.result)
                 }
-                reader.readAsDataURL(postdata.picture);
+                reader.readAsDataURL(imagesel);
             }
         }
         getImage();
-    }, [postdata.picture])
+    }, [imagesel])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -91,26 +92,27 @@ const UpdatePost = ({ match }) => {
             if (response.data.userId !== userid) {
                 history.push('/')
             }
-            setImageurl(response.data.picture);
         }
         fetchData()
     }, [])
 
     const savePost = async () => {
+        const formData = new FormData()
+        formData.append("file", imagesel)
+        formData.append("upload_preset", "wknx4lzp")
+        axios.post("https://api.cloudinary.com/v1_1/dldwmaxl1/image/upload", formData).then((response) => {
+            setImage(response.data.url)
+        })
         await updatePost(dispatch, postdata);
     }
     const handleChange = (e) => {
-        setPostdata({ ...postdata, [e.target.name]: e.target.type === "file" ? e.target.files[0] : e.target.value });
+        setPostdata({ ...postdata, [e.target.name]: e.target.value });
     }
     const updatePost = async (dispatch, post) => {
         dispatch(postStart());
         try {
-            const data = new FormData();
-            data.append("picture", postdata.picture);
-            data.append("title", postdata.title);
-            data.append("description", editorRef.current.getContent());
             const result = await axios.put(`/post/${match.params.id}/update`,
-                data, {
+                { picture: image, title: postdata.title, description: editorRef.current.getContent() }, {
                 headers: {
                     Authorization: "Bearer " + JSON.parse(localStorage.getItem('currentUser')).accesstoken
                 }
@@ -123,7 +125,7 @@ const UpdatePost = ({ match }) => {
             dispatch(postFailure());
         }
     };
-    const url = imageurlafter ? imageurlafter : `/${imageurl.slice(7,)}`
+    const url = imageurl ? imageurl : postdata.picture
     return (
         <>
             <Box className={classes.container}>
@@ -137,7 +139,9 @@ const UpdatePost = ({ match }) => {
                         type="file"
                         id="fileInput"
                         style={{ display: "none" }}
-                        onChange={(e) => handleChange(e)}
+                        onChange={(event) => {
+                            setImagesel(event.target.files[0]);
+                        }}
                     />
                     <input name='title' defaultValue={postdata.title} placeholder="Title" onChange={(e) => handleChange(e)} className={classes.textfield} />
                     <Button onClick={() => savePost()} disabled={isFetching} variant="contained" color="primary">Publish</Button>
@@ -145,6 +149,7 @@ const UpdatePost = ({ match }) => {
                 <Editor
                     onInit={(evt, editor) => editorRef.current = editor}
                     name='description'
+                    initialValue={postdata.description}
                 />
                 {/* <TextareaAutosize
                     rowsMin={5}

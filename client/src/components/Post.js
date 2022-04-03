@@ -40,7 +40,7 @@ const useStyle = makeStyles({
   heading: {
     textAlign: "center",
     fontSize: 18,
-    fontWeight: 600,
+    fontWeight: 600
   },
   detail: {
     fontSize: 16,
@@ -48,16 +48,19 @@ const useStyle = makeStyles({
     paddingBottom: 20,
   },
   clamp: {
+    wordBreak: 'break-word',
     textAlign: "center",
-    fontSize: 16,
+    fontSize: 15,
     textDecoration: 'none'
   },
 });
 
 const Post = ({ post }) => {
   const classes = useStyle();
-  const url = `/${post.picture.slice(7)}`;
   const [username, setUsername] = useState("");
+  const addEllipsis = (str, limit) => {
+    return str.length > limit ? str.substring(0, limit) + '...' : str;
+  }
   useEffect(() => {
     const getData = async () => {
       const response = await axios.get(
@@ -69,12 +72,12 @@ const Post = ({ post }) => {
   }, []);
   return (
     <Box className={classes.container}>
-      <img src={url} alt="no blogpost-image" className={classes.image} />
+      <img src={post.picture} alt="no blogpost-image" className={classes.image} />
       <Typography className={classes.text}>
         {" "}
         {new Date(post.createdAt).toDateString()}
       </Typography>
-      <Typography className={classes.heading}>{post.title}</Typography>
+      <Typography className={classes.heading}>{addEllipsis(post.title, 20)}</Typography>
       <Typography className={classes.text}>
         <b>Author:</b> {username}
       </Typography>
