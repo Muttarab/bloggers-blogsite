@@ -12,9 +12,11 @@ import '../index.css'
 import { postFailure, postStart, postSuccess } from "../redux/postRedux";
 const useStyle = makeStyles(theme => ({
     container: {
+        marginTop: '112px',
         margin: '50px 100px',
         [theme.breakpoints.down('md')]: {
-            margin: 0
+            marginTop: '100px',
+            margin: 0,
         },
     },
     picture: {
