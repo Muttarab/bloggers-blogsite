@@ -53,11 +53,11 @@ exports.login = async function (req, res) {
                     const accesstoken = jwt.sign({
                         email: user.email,
                         userId: user.id
-                    }, process.env.JWT_KEY, { expiresIn: "10y" })
+                    }, process.env.JWT_KEY, { expiresIn: "1d" })
                     const refreshtoken = jwt.sign({
                         email: user.email,
                         userId: user.id
-                    }, process.env.JWT_REFRESH_KEY, { expiresIn: "10y" })
+                    }, process.env.JWT_REFRESH_KEY, { expiresIn: "1d" })
                     refreshtokens.push(refreshtoken);
                     res.status(200).json({
                         email:user.email,
@@ -90,7 +90,7 @@ exports.renewaccesstoken = async function (req, res) {
         jwt.verify(refreshtoken, process.env.JWT_REFRESH_KEY, (err, user) => {
             if (!err) {
                 const accesstoken = jwt.sign({ username: user.name }, process.env.JWT_KEY, {
-                    expiresIn: "10y"
+                    expiresIn: "1d"
                 });
                 return res.json({ success: true, accesstoken });
             } else {
@@ -112,7 +112,7 @@ exports.getUser = async (request, response) => {
     } catch (error) {
         response.status(500).json(error)
     }
-  }
+}
 
 
 
