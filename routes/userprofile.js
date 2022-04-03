@@ -25,6 +25,6 @@ const upload = multer({storage:fileStorageEngine,fileFilter: (req, file, cb) => 
 
 router.get('/:id',Controller.getUserprofile)
 router.get('/getAll', Controller.getAll);
-router.post('/:id',checkAuthMiddleware.checkAuth, upload.single('picture') ,Controller.createorupdate);
+router.post('/:id',checkAuthMiddleware.checkAuth ,Controller.createorupdate);
 router.delete("/:userprofileId/delete",Controller.delete);
 module.exports = router;

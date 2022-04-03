@@ -11,7 +11,7 @@ const useStyle = makeStyles(theme => ({
         fontFamily: "Quicksand"
     },
     container: {
-        margin: '130px 110px',
+        margin: '100px 110px',
         [theme.breakpoints.down('md')]: {
             marginTop: 130,
         },
@@ -25,7 +25,7 @@ const useStyle = makeStyles(theme => ({
         borderBottom: "1px solid gray",
         border: "none",
         backgroundColor: "#F0F0F0",
-        width: 'auto'
+        width: '100%'
     },
     picture: {
         textAlign: 'center',
@@ -38,7 +38,6 @@ const useStyle = makeStyles(theme => ({
     },
     spanstyle: { color: "red", marginTop: "10px" },
     addIcon: { width: "100%" },
-    paperStyle: { marginTop: 115, padding: 20, height: '70vh', width: 280, margin: "20px auto" },
 }));
 const initialUserprofile = {
     gender: '',
@@ -50,25 +49,25 @@ const CreateUserprofile = () => {
     const classes = useStyle();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.currentUser);
+    const [imagesel, setImagesel] = useState("");
     const [userprofiledata, setUserprofiledata] = useState(initialUserprofile);
     const [imageurl, setImageurl] = useState('');
     const { isFetching, error } = useSelector((state) => state.userprofile);
-    const imgbefore = `/${userprofiledata.picture.slice(7,)}`
     const userid = user.id;
     const name = user.name;
     const email = user.email;
     useEffect(() => {
         const getImage = async () => {
-            if (userprofiledata.picture) {
+            if (imagesel) {
                 var reader = new FileReader();
                 reader.onloadend = function () {
                     setImageurl(reader.result)
                 }
-                reader.readAsDataURL(userprofiledata.picture);
+                reader.readAsDataURL(imagesel);
             }
         }
         getImage();
-    }, [userprofiledata.picture])
+    }, [imagesel])
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.get(`/userprofile/${userid}`)
@@ -77,36 +76,40 @@ const CreateUserprofile = () => {
         fetchData()
     }, [])
     const saveUserprofile = async () => {
-        await createUserprofile(dispatch, userprofiledata);
-    }
-    const handleChange = (e) => {
-        setUserprofiledata({ ...userprofiledata, [e.target.name]: e.target.type === "file" ? e.target.files[0] : e.target.value });
-    }
-    const createUserprofile = async (dispatch, userprofile) => {
-        dispatch(userprofileStart());
-        try {
-            const data = new FormData();
-            data.append("picture", userprofiledata.picture);
-            data.append("gender", userprofiledata.gender);
-            data.append("phonenumber", userprofiledata.phonenumber);
-            data.append("bio", userprofiledata.bio);
-            const result = await axios.post(`/userprofile/${userid}`,
-                data, {
-                headers: {
-                    Authorization: "Bearer " + JSON.parse(localStorage.getItem('currentUser')).accesstoken
+        const formData = new FormData()
+        formData.append("file", imagesel)
+        formData.append("upload_preset", "userprofilepictures")
+        await axios.post("https://api.cloudinary.com/v1_1/dldwmaxl1/image/upload", formData).then((response) => {
+            const createUserprofile = async ()=>{
+                dispatch(userprofileStart());
+                const result = await axios.post(`/userprofile/${userid}`,
+                    { picture: response.data.url, gender: userprofiledata.gender, phonenumber: userprofiledata.phonenumber, bio: userprofiledata.bio }, {
+                    headers: {
+                        Authorization: "Bearer " + JSON.parse(localStorage.getItem('currentUser')).accesstoken
+                    }
+                }
+                );
+                if(result.data){
+                    dispatch(userprofileSuccess(result.data));
+                    alert('User Profile Saved Successfully!');
+                }   else{
+                    alert('Profile not Saved, Something went Wrong!')
+                    dispatch(userprofileFailure());
                 }
             }
-            );
-            dispatch(userprofileSuccess(result.data));
-            alert('User Profile Saved Successfully!');
-        } catch (err) {
+            createUserprofile()
+        }).catch(() => {
             alert('Profile not Saved, Something went Wrong!')
             dispatch(userprofileFailure());
         }
-    };
+        )
+    }
+    const handleChange = (e) => {
+        setUserprofiledata({ ...userprofiledata, [e.target.name]: e.target.value });
+    }
     return (
-        <Grid>
-            <Grid className={classes.paperStyle}>
+        <div className="Userprofile">
+            <Grid className={classes.container}>
                 <Card style={{ maxWidth: 450, padding: "20px -1px", margin: "0 auto" }}>
                     <CardContent>
                         <Typography gutterBottom variant="h5" className={classes.text1}>
@@ -114,7 +117,7 @@ const CreateUserprofile = () => {
                         </Typography>
                         <Grid container spacing={1} justifyContent="center" alignItems="center">
                             <Grid xs={7} item >
-                                <img src={imageurl ? imageurl : imgbefore} alt="No Profile Picture" className={classes.picture} />
+                                <img src={imageurl ? imageurl : userprofiledata.picture} alt="No Profile Picture" className={classes.picture} />
                                 <label htmlFor="fileInput">
                                     <Add className={classes.addIcon} fontSize="large" color="action" />
                                 </label>
@@ -125,7 +128,9 @@ const CreateUserprofile = () => {
                                     type="file"
                                     id="fileInput"
                                     style={{ display: "none" }}
-                                    onChange={(e) => handleChange(e)}
+                                    onChange={(event) => {
+                                        setImagesel(event.target.files[0]);
+                                    }}
                                 />
                             </Grid>
                             <Grid xs={7} item >
@@ -155,7 +160,7 @@ const CreateUserprofile = () => {
                     </CardContent>
                 </Card>
             </Grid>
-            </Grid>
+        </div>
     )
 }
 export default CreateUserprofile;

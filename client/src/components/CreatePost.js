@@ -69,7 +69,6 @@ const CreatePost = () => {
     const [postdata, setPostdata] = useState(initialPost);
     const [imageurl, setImageurl] = useState('');
     const [imagesel, setImagesel] = useState("");
-    const [image, setImage] = useState('');
     const { isFetching, error } = useSelector((state) => state.post);
     const url = imageurl ? imageurl : 'https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80';
     const userid = user.id;
@@ -99,34 +98,39 @@ const CreatePost = () => {
         getImage();
     }, [imagesel])
     const savePost = async () => {
-        const formData=new FormData()
-        formData.append("file",imagesel)
-        formData.append("upload_preset","wknx4lzp")
-        axios.post("https://api.cloudinary.com/v1_1/dldwmaxl1/image/upload",formData).then((response)=>{
-            setImage(response.data.url)
-        })
-        await createPost(dispatch, postdata);
+        const formData = new FormData()
+        formData.append("file", imagesel)
+        formData.append("upload_preset", "postpictures")
+        await axios.post("https://api.cloudinary.com/v1_1/dldwmaxl1/image/upload", formData).then((response) => {
+            const createPost = async () => {
+                if (category) {
+                    dispatch(postStart());
+                    const result = await axios.post(`/post/${userid}/${category}/create`,
+                        { picture: response.data.url, title: postdata.title, description: editorRef.current.getContent() }, {
+                        headers: {
+                            Authorization: "Bearer " + JSON.parse(localStorage.getItem('currentUser')).accesstoken
+                        }
+                    }
+                    );
+                    if(result.data){
+                        dispatch(postSuccess(result.data));
+                        history.push('/')
+                    }
+                } else {
+                    alert('Post not Created, Select a Category and Choose Image to Post!')
+                    dispatch(postFailure());
+                }
+            }
+            createPost()
+        }).catch(() => {
+            alert('Post not Created, Select a Category and Choose Image to Post!')
+            dispatch(postFailure());
+        }
+        )
     }
     const handleChange = (e) => {
         setPostdata({ ...postdata, [e.target.name]: e.target.value });
     }
-    const createPost = async (dispatch, post) => {
-        dispatch(postStart());
-        try {
-            const result = await axios.post(`/post/${userid}/${category}/create`,
-                {picture:image,title:postdata.title,description:editorRef.current.getContent()}, {
-                headers: {
-                    Authorization: "Bearer " + JSON.parse(localStorage.getItem('currentUser')).accesstoken
-                }
-            }
-            );
-            dispatch(postSuccess(result.data));
-            history.push('/')
-        } catch (err) {
-            alert('Post not Created, Select a Category to Post!')
-            dispatch(postFailure());
-        }
-    };
     return (
         <>
             <Box className={classes.container}>
@@ -162,7 +166,7 @@ const CreatePost = () => {
                             type="file"
                             id="fileInput"
                             style={{ display: "none" }}
-                            onChange={(event)=>{
+                            onChange={(event) => {
                                 setImagesel(event.target.files[0]);
                             }}
                         />
@@ -178,7 +182,7 @@ const CreatePost = () => {
                 {error &&
                     <Alert severity="error">
                         <AlertTitle>Post not Created</AlertTitle>
-                        Select a Category to Post!
+                        Select a Category and Choose Image to Post!
                     </Alert>
                 }
             </Box>

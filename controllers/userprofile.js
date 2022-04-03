@@ -36,8 +36,7 @@ exports.createorupdate = async function (req, res) {
     Userprofile.findOne({ where: { userId: req.params.id } }).then(user => {
       if (user !== null) {
           const userprofileId = user.id;
-          const picture = req.file?.path? req.file.path:""
-          const { gender, phonenumber, bio } = req.body
+          const { gender, phonenumber, bio,picture } = req.body
           return Userprofile
             .findByPk(userprofileId)
             .then((userprofile) => {
@@ -63,8 +62,7 @@ exports.createorupdate = async function (req, res) {
             .catch(error => res.status(400).send(error));
       } else {
         const userId = req.params.id;
-        const picture = req.file?.path? req.file.path:""
-        const { gender, phonenumber, bio } = req.body;
+        const { gender, phonenumber, bio,picture } = req.body;
         const users = Userprofile.create({
           gender: gender,
           phonenumber: phonenumber,

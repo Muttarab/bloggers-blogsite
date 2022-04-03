@@ -51,12 +51,11 @@ const Navbar = () => {
   const classes = useStyle();
   const user = useSelector((state) => state.user.currentUser);
   const userprofile = useSelector((state) => state.userprofile.currentUserprofile);
-  const [userprofiledata, setUserprofiledata] = useState('');
-  const imgbefore = `/${userprofiledata.slice(7,)}`;
+  const [avatar, setAvatar] = useState('');
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(`/userprofile/${user.id}`);
-      setUserprofiledata(response.data.userprofile.picture);
+      setAvatar(response.data.userprofile.picture);
     }
     fetchData();
   }, [userprofile])
@@ -164,7 +163,7 @@ const Navbar = () => {
                 <Link onClick={logout} to='/login' className={classes.link}>
                   <Typography>LOGOUT</Typography>
                 </Link>
-                <Avatar alt="No Avatar" src={imgbefore} sx={{ display: 'none' }} />
+                <Avatar alt="No Avatar" src={avatar} sx={{ display: 'none' }} />
               </> :
               <>
                 <Link to='/login' className={classes.link}>
@@ -181,7 +180,7 @@ const Navbar = () => {
               <>
                 <Link to='/createuserprofile' className={classes.link}>
                   <Tooltip title={user.name.toUpperCase()}>
-                    <Avatar src={imgbefore} sx={{
+                    <Avatar src={avatar} sx={{
                       display: 'inline-block',
                       width: '34px',
                       height: '34px',
