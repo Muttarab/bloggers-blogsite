@@ -139,6 +139,7 @@ const Navbar = () => {
               }
             </Menu>
           </Box>
+          <Link to='/' className={classes.linklogohome}>
           <Typography
             variant="h6"
             noWrap
@@ -147,6 +148,7 @@ const Navbar = () => {
           >
             <img src={logo} height={90} width={120} />
           </Typography>
+          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Link to='/' className={classes.link}>
               <Typography>HOME</Typography>
