@@ -7,15 +7,13 @@ import { ArrowRight } from "@material-ui/icons";
 
 const useStyles = makeStyles({
     component: {
-        width: "30%",
-        margin: " 10px 125px",
-        background: '#F7F7F7',
+        marginTop: 30,
+        background: '#F5F5F5',
         padding: 10
     },
     container: {
         display: 'flex',
-        marginBottom: 5,
-        alignItems: "center"
+        marginBottom: 5
     },
     name: {
         fontWeight: 600,
@@ -29,9 +27,6 @@ const useStyles = makeStyles({
     delete: {
         marginLeft: 'auto'
     },
-    commFlex: {
-        display: "flex"
-    }
 })
 
 const Comment = ({ comment, setToggle }) => {

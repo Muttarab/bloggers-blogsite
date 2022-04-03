@@ -43,16 +43,8 @@ const useStyles = makeStyles({
   button: {
     height: 40,
   },
-  spanstyle: { color: "red", marginTop: "10px" },
   fav: {
     color: "#3b5998",
-  },
-  likeBtn: {
-    borderRadius: 0,
-    "&:hover": {
-      backgroundColor: "#e8e8e8",
-      borderRadius: 0
-    }
   },
 });
 const Comments = ({ postdata }) => {

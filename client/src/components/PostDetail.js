@@ -34,11 +34,8 @@ const useStyle = makeStyles((theme) => ({
   heading: {
     fontSize: 38,
     fontWeight: 600,
-    borderBottom: "2px solid #e1e1e1",
-    width: "20%",
-    paddingBottom: 10,
-    textAlign: "center",
-    margin: "20px auto",
+    textAlign: 'center',
+    margin: '50px 0 10px 0'
   },
   subheading: {
     color: "#878787",
