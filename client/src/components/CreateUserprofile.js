@@ -157,7 +157,7 @@ const CreateUserprofile = () => {
                             <input defaultValue={userprofiledata.bio} name='bio' multiline rows={4} onChange={(e) => handleChange(e)} placeholder="Type your bio here" variant="outlined" fullWidth className={classes.paddingadd} />
                         </Grid>
                         <Grid item xs={7}>
-                            <button onClick={saveUserprofile} disabled={isFetching} variant="outlined" className={classes.btnstyle}>Save Changes</button>
+                            <Button onClick={saveUserprofile} disabled={isFetching} variant="contained" color="primary" className={classes.btnstyle}>Save Changes</Button>
                         </Grid>
                     </Grid>
                     {error && <Alert severity="error">
