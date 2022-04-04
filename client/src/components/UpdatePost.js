@@ -66,7 +66,6 @@ const UpdatePost = ({ match }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector((state) => state.user.currentUser);
-    const [image, setImage] = useState('');
     const [postdata, setPostdata] = useState(initialPost);
     const [imageurl, setImageurl] = useState('');
     const [imagesel, setImagesel] = useState('');
@@ -99,32 +98,45 @@ const UpdatePost = ({ match }) => {
     const savePost = async () => {
         const formData = new FormData()
         formData.append("file", imagesel)
-        formData.append("upload_preset", "wknx4lzp")
-        axios.post("https://api.cloudinary.com/v1_1/dldwmaxl1/image/upload", formData).then((response) => {
-            setImage(response.data.url)
-        })
-        await updatePost(dispatch, postdata);
+        formData.append("upload_preset", "postpictures")
+        await axios.post("https://api.cloudinary.com/v1_1/dldwmaxl1/image/upload", formData).then((response) => {
+            const updatePost = async () => {
+                dispatch(postStart());
+                const result = await axios.put(`/post/${match.params.id}/update`,
+                    { picture: response.data.url, title: postdata.title, description: editorRef.current.getContent() }, {
+                    headers: {
+                        Authorization: "Bearer " + JSON.parse(localStorage.getItem('currentUser')).accesstoken
+                    }
+                }
+                );
+                if (result.data) {
+                    dispatch(postSuccess(result.data));
+                    history.push('/')
+                }
+            }
+            updatePost()
+        }).catch(() => {
+            const updatePost = async () => {
+                dispatch(postStart());
+                const result = await axios.put(`/post/${match.params.id}/update`,
+                    { picture: postdata.picture, title: postdata.title, description: editorRef.current.getContent() }, {
+                    headers: {
+                        Authorization: "Bearer " + JSON.parse(localStorage.getItem('currentUser')).accesstoken
+                    }
+                }
+                );
+                if (result.data) {
+                    dispatch(postSuccess(result.data));
+                    history.push('/')
+                }
+            }
+            updatePost()
+        }
+        )
     }
     const handleChange = (e) => {
         setPostdata({ ...postdata, [e.target.name]: e.target.value });
     }
-    const updatePost = async (dispatch, post) => {
-        dispatch(postStart());
-        try {
-            const result = await axios.put(`/post/${match.params.id}/update`,
-                { picture: image, title: postdata.title, description: editorRef.current.getContent() }, {
-                headers: {
-                    Authorization: "Bearer " + JSON.parse(localStorage.getItem('currentUser')).accesstoken
-                }
-            }
-            );
-            dispatch(postSuccess(result.data));
-            history.push('/')
-        } catch (err) {
-            alert('Post not Updated, Something went Wrong!')
-            dispatch(postFailure());
-        }
-    };
     const url = imageurl ? imageurl : postdata.picture
     return (
         <>

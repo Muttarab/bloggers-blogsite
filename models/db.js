@@ -3,7 +3,6 @@ const Sequelize = require("sequelize");
 const env = process.env.NODE_ENV || "development";
 const config = require(`../config/config.js`)[env];
 
-const db = {};
 let sequelize;
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
@@ -15,10 +14,4 @@ if (config.use_env_variable) {
     config
   );
 }
-// db.Post = require("./post")(sequelize, Sequelize.DataTypes);
-// console.log(db, "@db");
-// db.Post.associate(db);
-
-// db.sequelize = sequelize;
-// db.Sequelize = Sequelize;
 module.exports = sequelize;
