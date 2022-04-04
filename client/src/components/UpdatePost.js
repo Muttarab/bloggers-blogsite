@@ -112,6 +112,9 @@ const UpdatePost = ({ match }) => {
                 if (result.data) {
                     dispatch(postSuccess(result.data));
                     history.push('/')
+                }else{
+                    alert('Post not Updated, Something went Wrong!')
+                    dispatch(postFailure());
                 }
             }
             updatePost()
@@ -128,6 +131,9 @@ const UpdatePost = ({ match }) => {
                 if (result.data) {
                     dispatch(postSuccess(result.data));
                     history.push('/')
+                }else {
+                    alert('Post not Updated, Something went Wrong!')
+                    dispatch(postFailure());
                 }
             }
             updatePost()
