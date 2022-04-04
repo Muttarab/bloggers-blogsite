@@ -171,7 +171,7 @@ const Comments = ({ postdata }) => {
               )
             }
             checkedIcon={
-              liked !== 0 ? (
+              liked === 0 ? (
                 <ThumbUpOutlinedIcon className={classes.fav} />
               ) : (
                 <ThumbUpIcon className={classes.fav} />
