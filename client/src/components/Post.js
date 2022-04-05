@@ -28,10 +28,10 @@ const useStyle = makeStyles({
     },
   },
   image: {
-    width: '100%',
-    objectFit: 'cover',
-    height: 250,
+    width: "100%",
+    objectFit: "cover",
     borderRadius: "5px 5px 0 0",
+    height: 255,
   },
   text: {
     color: "#878787",
