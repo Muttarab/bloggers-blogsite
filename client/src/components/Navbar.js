@@ -11,6 +11,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import InfoIcon from '@mui/icons-material/Info';
+import PhoneIcon from '@mui/icons-material/Phone';
 import Menu from '@mui/material/Menu';
 import { makeStyles, Tooltip } from '@material-ui/core';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -52,9 +53,10 @@ const Navbar = () => {
   const user = useSelector((state) => state.user.currentUser);
   const userprofile = useSelector((state) => state.userprofile.currentUserprofile);
   const [avatar, setAvatar] = useState('');
+  const imgbefore = `http://localhost:8000/${avatar.slice(7,)}`;
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`/userprofile/${user.id}`);
+      const response = await axios.get(`http://localhost:8000/userprofile/${user.id}`);
       setAvatar(response.data.userprofile.picture);
     }
     fetchData();
@@ -109,6 +111,11 @@ const Navbar = () => {
                   <InfoIcon fontSize="small" />
                 </ListItemIcon>
                 ABOUT</MenuItem>
+                <MenuItem component={Link} to="/contact" onClick={handleClose}>
+                <PhoneIcon>
+                  <InfoIcon fontSize="small" />
+                </PhoneIcon>
+                CONTACT</MenuItem>
               {
                 user ?
                   <>
@@ -155,6 +162,9 @@ const Navbar = () => {
             <Link to='/about' className={classes.link}>
               <Typography>ABOUT</Typography>
             </Link>
+            <Link to='/contact' className={classes.link}>
+              <Typography>CONTACT</Typography>
+            </Link>
             {user ?
               <>
                 <Link to='/createuserprofile' className={classes.link}>
@@ -163,7 +173,7 @@ const Navbar = () => {
                 <Link onClick={logout} to='/login' className={classes.link}>
                   <Typography>LOGOUT</Typography>
                 </Link>
-                <Avatar alt="No Avatar" src={avatar} sx={{ display: 'none' }} />
+                <Avatar alt="No Avatar" src={imgbefore} sx={{ display: 'none' }} />
               </> :
               <>
                 <Link to='/login' className={classes.link}>
@@ -180,10 +190,10 @@ const Navbar = () => {
               <>
                 <Link to='/createuserprofile' className={classes.link}>
                   <Tooltip title={user.name.toUpperCase()}>
-                    <Avatar src={avatar} sx={{
+                    <Avatar src={imgbefore} sx={{
                       display: 'inline-block',
-                      width: '34px',
-                      height: '34px',
+                      width: 50,
+                      height: 50,
                     }} />
                   </Tooltip>
                 </Link>
