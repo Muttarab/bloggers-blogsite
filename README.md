@@ -17,6 +17,7 @@ cd resource-engagement/
 
 ```
 Step 2: Install client-side dependencies  
+```
 yarn
 ```
 Step 3: Setting environment variables  
