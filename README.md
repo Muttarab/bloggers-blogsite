@@ -7,37 +7,18 @@ Source code built with:
 - **Sequelize ORM** for connecting to the database (PostgreSQL)
 - **SASS** for better css organization and readability
 
-## How to close and run front-end repository
+## How to clone and run front-end repository
 
-Step 1: Installing dependencies
+Step 1: Clone github repository
 ```bash
 git clone https://github.com/InvoZone/resource-engagement.git
 cd resource-engagement/
 
-#install client-side dependencies
+
+```
+Step 2: Install client-side dependencies  
 yarn
-
-#if you want to run the client-side
-yarn start
 ```
-
-Step 2: creating tables in database
-```
-CREATE TABLE entries(
-    header char(50) NOT NULL,
-    subheader char(300) NOT NULL,
-    cateogry char(100) NOT NULL,
-    content text NOT NULL,
-    author char(50) NOT NULL,
-    date char(20) NOT NULL
-);
-CREATE TABLE users(
-    email char(100) NOT NULL,
-    username char(20) NOT NULL,
-    hash text NOT NULL
-);
-```
-
 Step 3: Setting environment variables  
 Create a new file as ".env", paste the below code and save. 
 ```
