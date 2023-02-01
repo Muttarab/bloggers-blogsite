@@ -5,7 +5,7 @@ InvoHub
 ![Forks](https://img.shields.io/github/forks/InvoZone/resource-engagement)
 ![Stars](https://img.shields.io/github/stars/InvoZone/resource-engagement)
 ![Licence](https://img.shields.io/github/license/InvoZone/resource-engagement)
-![Issues](https://img.shields.io/github/issues/InvoZone/resource-engagement)
+![Issues](https://img.shields.io/github/InvoZone/resource-engagement/issues)
 
 ## Project Link:
 Access site at [hub.invozone.com](https://hub.invozone.com/)
