@@ -1,5 +1,5 @@
-# Project Title
-InvoHub
+# Project Repository
+InvoHub-Frontend
 
 ## Project Link:
 Access site at [hub.invozone.com](https://hub.invozone.com/)
@@ -7,10 +7,9 @@ Access site at [hub.invozone.com](https://hub.invozone.com/)
 ## Tools and Technologies:
 - **React** for building user interface
 - **Redux** for global state management
-- **Express** for making back-end development easier
-- **Google Authenticator** for token creation and authentication
-- **Sequelize ORM** for connecting to the database (PostgreSQL)
 - **SCSS** for better css organization and readability
+- **Ant Design** for building rich and interactive interface
+- **Material UI** for creating user experience better
 
 ## Pre-requisite Packages:
 - **NVM:** 0.39.1
