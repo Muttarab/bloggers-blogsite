@@ -1,17 +1,16 @@
-
 # Project Title
 InvoHub
 
 ## Project Link:
 Access site at [hub.invozone.com](https://hub.invozone.com/)
 
-## Source Code built with:
+## Tools and Technologies:
 - **React** for building user interface
 - **Redux** for global state management
 - **Express** for making back-end development easier
 - **Google Authenticator** for token creation and authentication
 - **Sequelize ORM** for connecting to the database (PostgreSQL)
-- **SASS** for better css organization and readability
+- **SCSS** for better css organization and readability
 
 ## Pre-requisite Packages:
 - **NVM:** 0.39.1
@@ -21,10 +20,9 @@ Access site at [hub.invozone.com](https://hub.invozone.com/)
 ## How to clone and run front-end repository
 
 ### Step 1: Clone github repository
-```bash
+```
 git clone https://github.com/InvoZone/resource-engagement.git
 cd resource-engagement/
-
 ```
 ### Step 2: Install client-side dependencies  
 ```
@@ -41,5 +39,4 @@ REACT_APP_GOOGLE_LOGIN_CLIENT_ID=365043794676-m7ti5j4dviv7u70lbvnvse6coqd0emei.a
 ### Step 4:  To run client-side repository
 ```
 yarn start
-```
 ```
