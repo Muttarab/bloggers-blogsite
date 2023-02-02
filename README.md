@@ -28,12 +28,7 @@ cd resource-engagement/
 yarn
 ```
 ### Step 3: Setting environment variables  
-Create a new file as ".env", paste the below code and save. 
-```
-NODE_ENV="development"
-REACT_APP_URL="https://hub.invozone.com"
-REACT_APP_API_URL="http://127.0.0.1:8000"
-REACT_APP_GOOGLE_LOGIN_CLIENT_ID=365043794676-m7ti5j4dviv7u70lbvnvse6coqd0emei.apps.googleusercontent.com
+Please copy env.example file and add your keys or ask team.
 ```
 ### Step 4:  To run client-side repository
 ```
